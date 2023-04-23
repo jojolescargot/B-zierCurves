@@ -7,7 +7,7 @@ public class Managing : MonoBehaviour
     Dictionary<int, List<int>> COLOR = new Dictionary<int, List<int>>();
     Camera cam;
 
-
+    bool setUpNumberOfDots = true;
     public int numberOfDotsNeeded;
 
     public GameObject DotPrefab;
@@ -59,7 +59,25 @@ public class Managing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(setUpNumberOfDots)
+        {
+            if(Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                numberOfDotsNeeded += 1;
 
+            }
+            if(Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                numberOfDotsNeeded -= 1;
+                
+            }
+            if(Input.GetKeyDown(KeyCode.Return))
+            { 
+                setUpNumberOfDots = false;
+            }
+        }
+        if(!setUpNumberOfDots)
+        {
             if(listOfStructureDot.Count == numberOfDotsNeeded)
             {
                 if(first)
@@ -132,6 +150,8 @@ public class Managing : MonoBehaviour
             listOfStructureDot.Add(DotObject);
             numberOfDots += 1;
         }
+
+        }
     }
 
 
@@ -153,4 +173,5 @@ public class Managing : MonoBehaviour
             LineObject.SetColors( MakeListIntoColor(COLOR[1]),  MakeListIntoColor(COLOR[1]));  
         }
     }
+
 }
